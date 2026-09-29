@@ -1,0 +1,475 @@
+
+
+   :root {
+    --bg: #ffffff;
+    --text: #0b4d0b;
+    --accent: #006400;
+    --nav-bg: #e8e8e8;
+    --nav-text: #111111;
+    --strip-bg: #ffffff;
+
+    --rain-dim: #004d00;
+    --rain-big: #003000;
+    --rain-lead: #000000;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #000000;
+        --text: #2ecc40;
+        --accent: #2ecc40;
+        --nav-bg: #333333;
+        --nav-text: #ffffff;
+        --strip-bg: #1a1a1a;
+
+        --rain-dim: #002e00;
+        --rain-big: #008000;
+        --rain-lead: #ffffff;
+    }
+}
+
+
+/* =========================================
+   looked on w3 for scrolling behavior to 
+   copy one of the websites you provided.
+   ========================================= */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem; 
+}
+
+body {
+    margin: 0;
+    font-family: 'Courier New', monospace;
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+h1, h2, h3, h4 {
+    color: var(--accent);
+}
+
+h1 { font-size: 2.25rem; }
+h2 { font-size: 1.75rem; text-align: center; }
+h3 { font-size: 1.35rem; }
+
+p, ul {
+    line-height: 1.6;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+
+/* =========================================
+   SECTIONS
+   ========================================= */
+
+section {
+    max-width: 70rem;
+    margin: 0 auto;
+    padding: 4rem 1rem;
+    box-sizing: border-box;
+}
+
+/* full-screen sections, content vertically centered */
+.page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+
+
+.home {
+    position: relative;   
+    overflow: hidden;
+    align-items: center;
+    text-align: center;
+}
+
+.home-content {
+    position: relative;
+    z-index: 1;           
+}
+
+/* =========================================
+   NAVIGATION
+   Got help from W3 schools for this nav bar
+   ========================================= */
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 1;           
+}
+
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-color: var(--nav-bg);
+}
+
+nav li {
+    flex: 1 1 50%;
+    text-align: center;
+}
+
+nav a {
+    display: block;
+    padding: 1rem;
+    color: var(--nav-text);
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================
+   Got help from W3 schools at the same time 
+   I got help for the scrollable stuff 
+   ========================================= */
+.scroll-button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 1rem 2rem;
+    background-color: var(--accent);
+    color: var(--bg);
+    border: 2px solid var(--accent);
+    border-radius: 0.5rem;
+    text-decoration: none;
+}
+
+.scroll-button:hover {
+    opacity: 0.85;
+}
+
+.scroll-button.outline {
+    background-color: transparent;
+    color: var(--accent);
+}
+
+
+
+.project {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.project-image,
+.project-info,
+.project-image-standalone {
+    width: 100%;
+}
+
+/* scrollable pictures: each one is shown in full, swipe/scroll for the next. Got this from W# Schools*/
+.project-image {
+    height: 18rem;
+    background-color: var(--strip-bg);
+    border: 1px solid var(--accent);
+    padding: 0.625rem;
+    box-sizing: border-box;
+    display: flex;
+    gap: 0.625rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+}
+
+.project-image img {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: contain;
+    scroll-snap-align: center;
+}
+
+
+
+
+#contact {
+    text-align: center;
+}
+
+.contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.contact-links .scroll-button {
+    margin-top: 0;
+}
+
+
+
+@media (min-width: 600px) {
+
+    section {
+        padding: 4rem 2rem;
+    }
+
+    nav li {
+        flex: 0 1 auto;
+    }
+
+    .project {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .project-image {
+        width: 40%;
+    }
+
+    .project-info {
+        width: 60%;
+    }
+
+    .project-image-standalone {
+        width: 30%;
+    }
+
+    h1 { 
+        font-size: 3.5rem; 
+    }
+    h2 { 
+        font-size: 2.5rem; 
+    }
+}
+
+
+
+@media (min-width: 1000px) {
+
+    nav ul {
+        gap: 2rem;
+    }
+
+    h1 { font-size: 4rem; }
+    h2 { font-size: 3rem; }
+}
+
+
+/* =========================================
+   ANIMATED BACKGROUND (Matrix rain)
+   I got this from CODEPEN for a nice touch
+
+   ========================================= */
+
+/* CSS TIMER */
+@property --timer {
+    syntax: '<integer>';
+    inherits: false;
+    initial-value: 1;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    z-index: 0;
+    pointer-events: none;
+}
+
+
+/* LETTER HORIZONTAL POSITIONS */
+
+.l00  { left: 0; }
+.l05  { left: 5%; }
+.l10  { left: 10%; }
+.l15  { left: 15%; }
+.l20  { left: 20%; }
+.l25  { left: 25%; }
+.l30  { left: 30%; }
+.l35  { left: 35%; }
+.l40  { left: 40%; }
+.l45  { left: 45%; }
+.l50  { left: 50%; }
+.l55  { left: 55%; }
+.l60  { left: 60%; }
+.l65  { left: 65%; }
+.l70  { left: 70%; }
+.l75  { left: 75%; }
+.l80  { left: 80%; }
+.l85  { left: 85%; }
+.l90  { left: 90%; }
+.l95  { left: 95%; }
+.l100 { left: calc(100% - 20px); }
+
+
+/* LETTER STARTING POSITIONS
+   (class names are kept for the HTML; the values are what matter) */
+
+.t180 { top: -680px; }
+.t190 { top: -690px; }
+.t200 { top: -400px; }
+.t290 { top: -790px; }
+.t300 { top: -300px; }
+.t320 { top: -320px; }
+.t380 { top: -680px; }
+.t400 { top: -400px; }
+.t420 { top: -720px; }
+.t500 { top: -500px; }
+.t520 { top: -520px; }
+.t530 { top: -730px; }
+.t600 { top: -600px; }
+.t650 { top: -650px; }
+.t700 { top: -700px; }
+.t800 { top: -800px; }
+.t900 { top: -900px; }
+
+
+/* MAIN LETTER */
+
+.letter {
+    position: absolute;
+
+    background-color: transparent;
+
+    counter-reset:
+        timer-1 calc(var(--timer) + 9)
+        timer-2 calc(var(--timer) + 8)
+        timer-3 calc(var(--timer) + 7)
+        timer-4 calc(var(--timer) + 6)
+        timer-5 calc(var(--timer) + 5)
+        timer-6 calc(var(--timer) + 4)
+        timer-7 calc(var(--timer) + 3)
+        timer-8 calc(var(--timer) + 2)
+        timer-9 calc(var(--timer) + 1)
+        timer-10 calc(var(--timer) + 0);
+
+    animation:
+        animate-letter 2s linear infinite running,
+        animate-rotate 1s linear infinite running,
+        animate-position 5s linear infinite running;
+}
+
+/* SECOND SET OF LETTERS */
+.d2 {
+    animation-delay: 2.5s;
+}
+
+
+/* LETTER SIZE */
+
+.letter div {
+    width: 20px;
+    height: 140px;
+
+    font-size: 12px;
+
+    color: var(--rain-dim);
+}
+
+/* BIG LETTERS (after .letter div, so no !important needed) */
+.letter.big div {
+    width: 40px;
+    height: 300px;
+
+    font-size: 24px;
+
+    color: var(--rain-big);
+}
+
+
+/* LETTER TRAIL */
+
+.letter div:before {
+    position: absolute;
+
+    filter: brightness(2.5) blur(0.5px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+
+    content:
+        counter(timer-1, lower-alpha)
+        counter(timer-2, lower-alpha)
+        counter(timer-3, lower-alpha)
+        counter(timer-4, lower-alpha)
+        counter(timer-5, lower-alpha)
+        counter(timer-6, lower-alpha)
+        counter(timer-7, lower-alpha)
+        counter(timer-8, lower-alpha)
+        counter(timer-9, lower-alpha)
+        counter(timer-10, lower-alpha);
+
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+}
+
+
+/* BRIGHT LEADING LETTER */
+
+.letter div:after {
+    position: absolute;
+
+    content: counter(timer-1, lower-alpha);
+
+    color: var(--rain-lead);
+
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: end;
+
+    background: linear-gradient(180deg, var(--bg), transparent);
+
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+}
+
+
+/* ANIMATIONS */
+
+@keyframes animate-letter {
+    to { --timer: 16; }
+}
+
+@keyframes animate-rotate {
+    to { transform: rotateY(180deg); }
+}
+
+@keyframes animate-position {
+    to { top: calc(100% + 40px); }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    .letter {
+        animation: none;
+    }
+}
